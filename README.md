@@ -1,2 +1,2 @@
-Made by Vitali Bakhanovich
+Made by Vitali Bakhanovich.
 QML design + C++ backend logic
