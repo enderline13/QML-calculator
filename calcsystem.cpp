@@ -1,5 +1,6 @@
 #include <QRegularExpression>
 #include "calcsystem.h"
+#include <iostream>
 
 const QRegularExpression& getRegex()
 {
@@ -32,6 +33,19 @@ void CalcSystem::calculate() {
 }
 
 void CalcSystem::slotButtonClicked(QString str) {
+    if (str == "%") {
+        if(stk.count() >= 2) {
+            QString strOperation = stk.pop();
+            qreal fOperand1 = stk.pop().toDouble();
+            qreal fOperand2 = tempStr.toDouble();
+            qreal tempVar = fOperand2 / 100 * fOperand1;
+            tempStr = QString::number(tempVar);
+            setDisplay(tempStr);
+            stk.push(QString::number(fOperand1));
+            stk.push(strOperation);
+        }
+        return;
+    }
     if (str == "C") {
         stk.clear();
         tempStr = "";
@@ -99,6 +113,7 @@ void CalcSystem::slotButtonClicked(QString str) {
         }
     }
     emit displayChanged();
+    std::cout << stk.count();
 }
 
 QString CalcSystem::display() {
