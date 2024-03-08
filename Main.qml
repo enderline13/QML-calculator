@@ -32,7 +32,18 @@ Window {
         }
     }
 
+
     GridLayout {
+        focus: true
+        Keys.onPressed: (event)=> {
+                            if (event.text.match(/[0-9+-/*=\.]/)) {
+                                sys.slotButtonClicked(event.text);
+                                event.accepted = true;
+                            }
+                        }
+        Component.onCompleted: {
+            forceActiveFocus();
+        }
         anchors.top: rect.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -113,5 +124,7 @@ Window {
             text: "="
         }
     }
+
+
 
 }
